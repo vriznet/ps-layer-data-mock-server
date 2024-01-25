@@ -34,9 +34,14 @@ const startServer = async () => {
 
   await server.start();
 
+  const corsOptions = {
+    origin: 'https://ddoc-user-screen-1-vriznet.vercel.app',
+    credentials: true,
+  };
+
   app.use(
     '/graphql',
-    cors<cors.CorsRequest>(),
+    cors<cors.CorsRequest>(corsOptions),
     express.json(),
     logger('tiny'),
     expressMiddleware(server, {
