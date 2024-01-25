@@ -6,6 +6,7 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import cors from 'cors';
 import { expressMiddleware } from '@apollo/server/express4';
 import logger from 'morgan';
+import { ApolloServerPluginLandingPageGraphQLPlayground } from '@apollo/server-plugin-landing-page-graphql-playground';
 
 interface IContext {
   token?: string;
@@ -21,7 +22,14 @@ const startServer = async () => {
 
   const server = new ApolloServer<IContext>({
     schema: execSchema,
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    introspection: true,
+    plugins:
+      process.env.NODE_ENV === 'production'
+        ? [ApolloServerPluginDrainHttpServer({ httpServer })]
+        : [
+            ApolloServerPluginDrainHttpServer({ httpServer }),
+            ApolloServerPluginLandingPageGraphQLPlayground(),
+          ],
   });
 
   await server.start();
