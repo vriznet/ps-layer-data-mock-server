@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon --exec ts-node src --ext ts,js --delay 1",
     "build": "tsc && babel built --out-dir build",
-    "start": "node build/server"
+    "start": "node build/index.js"
   },
   "keywords": [],
   "author": "",
