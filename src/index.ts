@@ -35,7 +35,8 @@ const startServer = async () => {
   await server.start();
 
   const corsOptions = {
-    origin: 'https://ddoc-user-screen-1-vriznet.vercel.app',
+    origin: 'https://ddoc-user-screen-1.vercel.app',
+    // origin: 'http://localhost:3000',
     credentials: true,
   };
 
